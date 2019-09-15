@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/splashFragment">
+    <fragment android:id="@+id/splashFragment" android:name="com.arepadeobiri.fundall.splash.SplashFragment"
+              android:label="SplashFragment">
+        <action android:id="@+id/action_splashFragment_to_signUpFragment" app:destination="@id/signUpFragment"/>
+        <action android:id="@+id/action_splashFragment_to_loginOptionFragment"
+                app:destination="@id/loginOptionFragment"/>
+    </fragment>
+    <fragment android:id="@+id/signUpFragment" android:name="com.arepadeobiri.fundall.signUp.SignUpFragment"
+              android:label="SignUpFragment">
+        <action android:id="@+id/action_signUpFragment_to_welcomeBackFragment"
+                app:destination="@id/welcomeBackFragment"/>
+    </fragment>
+    <fragment android:id="@+id/welcomeBackFragment" android:name="com.arepadeobiri.fundall.WelcomeBackFragment"
+              android:label="WelcomeBackFragment">
+        <argument android:name="isUserPresent" app:argType="boolean"/>
+        <action android:id="@+id/action_welcomeBackFragment_to_homeFragment" app:destination="@id/homeFragment"/>
+    </fragment>
+    <fragment android:id="@+id/loginOptionFragment" android:name="com.arepadeobiri.fundall.LoginOptionFragment"
+              android:label="LoginOptionFragment">
+        <action android:id="@+id/action_loginOptionFragment_to_welcomeBackFragment"
+                app:destination="@id/welcomeBackFragment"/>
+    </fragment>
+    <fragment android:id="@+id/homeFragment" android:name="com.arepadeobiri.fundall.HomeFragment"
+              android:label="fragment_home" tools:layout="@layout/fragment_home"/>
+</navigation>

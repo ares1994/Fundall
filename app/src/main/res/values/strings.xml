@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Fundall</string>
+    <string name="start">Start</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password">Password</string>
+    <string name="let_s_get_started">Let\'s get started</string>
+    <string name="your_first_step_towards_a_better_financial_lifestyle_starts_here">Your first step towards a better
+        financial lifestyle starts here
+    </string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="cancel">Cancel</string>
+    <string name="benefits">Benefits</string>
+    <string name="email_address">Email Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="got_invite_code">Got invite code?</string>
+    <string name="sign_up">sign up</string>
+    <string name="already_a_member">Already a member?Log in</string>
+    <string name="log_in">Log in</string>
+    <string name="biometrics">Biometrics</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="new_here_create_account">new here?Create Account</string>
+    <string name="forgot_password">forgot password?</string>
+    <string name="create_account">Create Account</string>
+
+</resources>
