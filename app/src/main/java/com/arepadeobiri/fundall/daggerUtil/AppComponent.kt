@@ -1,6 +1,7 @@
 package com.arepadeobiri.fundall.daggerUtil
 
 
+import com.arepadeobiri.fundall.Login.LoginViewModel
 import com.arepadeobiri.fundall.signUp.SignUpViewModel
 import com.arepadeobiri.fundall.splash.SplashFragment
 import com.arepadeobiri.fundall.splash.SplashViewModel
@@ -18,7 +19,7 @@ interface AppComponent {
 
     fun inject(viewModel: SignUpViewModel)
 
-
+    fun inject(viewMOdel: LoginViewModel)
 
 
 }

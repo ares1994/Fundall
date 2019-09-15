@@ -21,10 +21,9 @@ data class User(
     val lastName: String,
 
     @ColumnInfo
-    val avatarUrl: String,
+    val avatarUrl: String
 
-    @ColumnInfo
-    val token: String
+
 
 
 )

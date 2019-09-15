@@ -43,7 +43,6 @@ class SignUpViewModel(appComponent: AppComponent) : ViewModel() {
         scope.launch {
             try {
                 val list = fundallIO.registerUserAsync(
-                    "application/json",
                     firstName,
                     lastName,
                     email,

@@ -38,7 +38,7 @@ class SplashFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(SplashViewModel::class.java)
 
         binding.startText.setOnClickListener {
-            if (viewModel.currentUser.isNullOrEmpty()) {
+            if (viewModel.currentUser.value.isNullOrEmpty()) {
                 this.findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
                 return@setOnClickListener
             } else {

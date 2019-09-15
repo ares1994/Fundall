@@ -1,5 +1,6 @@
 package com.arepadeobiri.fundall.splash
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.arepadeobiri.fundall.database.User
 import com.arepadeobiri.fundall.database.UserDao
@@ -12,21 +13,23 @@ class SplashViewModel(appComponent: AppComponent) : ViewModel() {
     @Inject
     lateinit var database: UserDao
 
-    val job = Job()
+    private val job = Job()
 
-    lateinit var currentUser: List<User>
 
-    val scope = CoroutineScope(Dispatchers.Main + job)
+    private val scope = CoroutineScope(Dispatchers.Main + job)
+
 
     init {
         appComponent.inject(this)
-        scope.launch {
-            withContext(Dispatchers.IO) {
-                currentUser = database.getAll()
-            }
-        }
-
     }
 
+    val currentUser = database.getAll()
 
+
+
+
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
+    }
 }

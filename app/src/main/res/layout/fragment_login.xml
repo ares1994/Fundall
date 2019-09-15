@@ -8,7 +8,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="24dp"
-            tools:context=".WelcomeBackFragment">
+            tools:context=".Login.LoginFragment">
 
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
@@ -94,6 +94,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:textSize="12sp"
+                    android:id="@+id/passwordEditText"
                     style="@style/fieldTheme"
                     android:hint="@string/password"
                     android:backgroundTint="@color/editsColor"
@@ -106,14 +107,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="32dp"
-                android:id="@+id/signUpButton"
+                android:id="@+id/loginButton"
                 android:backgroundTint="@color/editsColor"
                 android:text="@string/log_in"
                 app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"/>
 
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  app:layout_constraintTop_toBottomOf="@id/signUpButton"
+                  app:layout_constraintTop_toBottomOf="@id/loginButton"
                   android:layout_marginTop="32dp"
                   android:id="@+id/newHereTextView"
                   app:layout_constraintStart_toStartOf="@id/passwordInputLayout"
