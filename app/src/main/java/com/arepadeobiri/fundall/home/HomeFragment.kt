@@ -10,12 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toFile
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.arepadeobiri.fundall.FundallApplication
 import com.arepadeobiri.fundall.R
 import com.arepadeobiri.fundall.databinding.FragmentHomeBinding
 import com.arepadeobiri.fundall.GenericViewModelFactory
+import com.arepadeobiri.fundall.network.UploadImage
 import com.theartofdev.edmodo.cropper.CropImage
 
 
@@ -58,6 +60,10 @@ class HomeFragment : Fragment() {
 
             if (resultCode == RESULT_OK) {
                 imageUri = result.uri
+
+
+                viewModel.uploadAvatar(UploadImage(imageUri.toString(), imageUri.toFile()))
+
                 binding.avatarImageView.setImageURI(imageUri)
 
             } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {

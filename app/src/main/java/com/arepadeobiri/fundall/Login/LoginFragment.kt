@@ -39,6 +39,7 @@ class LoginFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
 
         if (args!!.isUserPresent) {
+            viewModel.retrieveProfile()
             binding.profileImageView.visibility = View.VISIBLE
             binding.welcomeBackTextView.visibility = View.VISIBLE
             binding.missYouTextView.visibility = View.VISIBLE
@@ -46,7 +47,12 @@ class LoginFragment : Fragment() {
             binding.emailInputLayout.visibility = View.INVISIBLE
             binding.missYouTextView.text = getString(R.string.we_miss_you, viewModel.pref.getString("firstname", ""))
             binding.emailTextView.text = viewModel.pref.getString("email", "")
-            viewModel.picasso.load(viewModel.pref.getString("avatarUrl", "")).into(binding.profileImageView)
+
+            binding.profileImageView.setImageResource(R.drawable.placeholder)
+            viewModel.profileInfo.observe(this, Observer {
+                viewModel.picasso.load(it.data!!.avatar).into(binding.profileImageView)
+            })
+
         } else {
             binding.profileImageView.visibility = View.INVISIBLE
             binding.welcomeBackTextView.visibility = View.INVISIBLE

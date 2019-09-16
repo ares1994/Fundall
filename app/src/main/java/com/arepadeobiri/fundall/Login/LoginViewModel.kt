@@ -26,6 +26,9 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
     private val _loginFailed = MutableLiveData<Error>()
     val loginFailed: LiveData<Error> get() = _loginFailed
 
+    private val _profileInfo = MutableLiveData<com.arepadeobiri.fundall.network.profileDataModels.Success>()
+    val profileInfo: LiveData<com.arepadeobiri.fundall.network.profileDataModels.Success> get() = _profileInfo
+
     @Inject
     lateinit var pref: SharedPreferences
 
@@ -53,7 +56,7 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
                     putString("lastname", user.lastname).apply()
                     putString("avatarUrl", user.avatar).apply()
                     putString("email", user.email).apply()
-                    putString("token", user.accessToken).apply()
+                    putString("token", "Bearer "+ user.accessToken).apply()
                 }
 
 
@@ -66,6 +69,16 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
         }
 
 
+    }
+
+    fun retrieveProfile(){
+        scope.launch {
+            val response = fundallIO.retrieveProfileAsync().await()
+            if (response.success!= null){
+             _profileInfo.value = response.success
+            }
+
+        }
     }
 
 }

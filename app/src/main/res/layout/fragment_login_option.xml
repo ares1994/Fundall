@@ -9,7 +9,7 @@
 
             android:layout_height="match_parent"
 
-            tools:context=".LoginOptionFragment">
+            tools:context=".loginOption.LoginOptionFragment">
         <ImageView android:layout_width="0dp" android:layout_height="0dp"
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toTopOf="parent"
@@ -26,36 +26,64 @@
                    android:src="@drawable/ic_fundall_icon"
                    android:id="@+id/iconImageView"
                    app:layout_constraintVertical_bias="0.417"/>
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintTop_toBottomOf="@id/iconImageView"
                   android:layout_marginTop="32dp"
-                  android:textSize="32sp"
+                  android:textAppearance="?android:attr/textAppearanceLarge"
                   android:id="@+id/lifestyleTextView"
                   tools:text="Chimidi's lifestyle"
                   android:textColor="@android:color/white"
                   android:gravity="center"/>
 
         <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  app:layout_constraintTop_toTopOf="@id/lifestyleTextView"
+                  app:layout_constraintBottom_toBottomOf="@id/lifestyleTextView"
+                  app:layout_constraintEnd_toEndOf="@id/lifestyleTextView"
+                  android:textAppearance="?android:attr/textAppearanceLarge"
+                  android:textColor="@android:color/white"
+                  android:textStyle="bold"
+                  tools:text="lifestyle"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
                   android:id="@+id/switchAccountTextView"
                   app:layout_constraintTop_toBottomOf="@id/lifestyleTextView"
-                  tools:text="Not Chimidi?Switch Account"
+                  tools:text="Not Chimidi? Switch Account"
                   android:textColor="@android:color/white"
                   android:layout_marginTop="8dp"
-                  android:gravity="center"/>
+        />
 
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  app:layout_constraintTop_toTopOf="@id/switchAccountTextView"
+                  app:layout_constraintBottom_toBottomOf="@id/switchAccountTextView"
+                  app:layout_constraintEnd_toEndOf="@id/switchAccountTextView"
+                  android:text="@string/switch_account"
+                  android:id="@+id/switchAccountTextViewButton"
+                  android:textColor="@android:color/white"
+                  android:gravity="end"
+                  android:textStyle="bold"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintTop_toBottomOf="@id/switchAccountTextView"
                   android:textColor="@android:color/white"
+                  android:id="@+id/newHereTextView"
                   android:text="@string/new_here_create_account"
                   android:gravity="center"
-
         />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  app:layout_constraintTop_toTopOf="@id/newHereTextView"
+                  app:layout_constraintBottom_toBottomOf="@id/newHereTextView"
+                  app:layout_constraintEnd_toEndOf="@id/newHereTextView"
+                  android:id="@+id/newHereTextViewButton"
+                  android:text="@string/create_account"
+                  android:textStyle="bold"
+                  android:textColor="@android:color/white"/>
 
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
