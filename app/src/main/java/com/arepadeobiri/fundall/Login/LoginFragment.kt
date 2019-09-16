@@ -69,6 +69,7 @@ class LoginFragment : Fragment() {
 
         viewModel.loginSuccessful.observe(this, Observer {
             Snackbar.make(binding.root, "Login Successful", Snackbar.LENGTH_LONG).show()
+            this.findNavController().navigate(LoginFragmentDirections.actionWelcomeBackFragmentToHomeFragment())
         })
 
         viewModel.loginFailed.observe(this, Observer {

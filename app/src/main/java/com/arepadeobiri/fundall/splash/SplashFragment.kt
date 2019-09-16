@@ -22,7 +22,7 @@ class SplashFragment : Fragment() {
 
     private lateinit var viewModel: SplashViewModel
 
-   
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
