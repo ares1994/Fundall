@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".HomeFragment">
+            tools:context=".home.HomeFragment">
 
         <com.mikhaellopez.circularimageview.CircularImageView android:layout_width="200dp"
                                                               android:layout_height="200dp"

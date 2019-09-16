@@ -1,4 +1,4 @@
-package com.arepadeobiri.fundall
+package com.arepadeobiri.fundall.home
 
 
 import android.app.Activity.RESULT_OK
@@ -11,8 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import com.arepadeobiri.fundall.FundallApplication
 import com.arepadeobiri.fundall.R
 import com.arepadeobiri.fundall.databinding.FragmentHomeBinding
+import com.arepadeobiri.fundall.GenericViewModelFactory
 import com.theartofdev.edmodo.cropper.CropImage
 
 
@@ -20,12 +23,19 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var imageUri: Uri
+    private lateinit var viewModel: HomeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+
+        val viewModelFactory =
+            GenericViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
+
+
 
 
 
@@ -49,6 +59,7 @@ class HomeFragment : Fragment() {
             if (resultCode == RESULT_OK) {
                 imageUri = result.uri
                 binding.avatarImageView.setImageURI(imageUri)
+
             } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(this.context, "Error is : ${result.error}", Toast.LENGTH_LONG).show()
             }

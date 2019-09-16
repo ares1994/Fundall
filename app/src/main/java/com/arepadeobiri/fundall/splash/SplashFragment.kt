@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.arepadeobiri.fundall.R
 import com.arepadeobiri.fundall.databinding.FragmentSplashBinding
 import com.arepadeobiri.fundall.FundallApplication
-import javax.inject.Inject
+import com.arepadeobiri.fundall.GenericViewModelFactory
 
 
 class SplashFragment : Fragment() {
@@ -33,7 +33,7 @@ class SplashFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_splash, container, false)
 
         val viewModelFactory =
-            SplashViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
+            GenericViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(SplashViewModel::class.java)
 
         Log.d("Ares", viewModel.pref.getString("firstname","something")!!)

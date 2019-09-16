@@ -53,6 +53,7 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
                     putString("lastname", user.lastname).apply()
                     putString("avatarUrl", user.avatar).apply()
                     putString("email", user.email).apply()
+                    putString("token", user.accessToken).apply()
                 }
 
 

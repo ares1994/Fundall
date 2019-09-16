@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.arepadeobiri.fundall.FundallApplication
 import com.arepadeobiri.fundall.R
 import com.arepadeobiri.fundall.databinding.FragmentLoginBinding
+import com.arepadeobiri.fundall.GenericViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -33,7 +34,7 @@ class LoginFragment : Fragment() {
         )
 
         val viewModelFactory =
-            LoginViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
+            GenericViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
 

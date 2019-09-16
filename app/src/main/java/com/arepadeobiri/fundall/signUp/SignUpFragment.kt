@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.arepadeobiri.fundall.R
 import com.arepadeobiri.fundall.databinding.FragmentSignUpBinding
 import com.arepadeobiri.fundall.FundallApplication
+import com.arepadeobiri.fundall.GenericViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -29,7 +30,7 @@ class SignUpFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
 
         val viewModelFactory =
-            SignUpViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
+            GenericViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(SignUpViewModel::class.java)
 
         viewModel.registerMessage.observe(this, Observer {

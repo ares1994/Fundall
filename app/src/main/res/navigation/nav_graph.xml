@@ -25,6 +25,6 @@
         <action android:id="@+id/action_loginOptionFragment_to_welcomeBackFragment"
                 app:destination="@id/welcomeBackFragment"/>
     </fragment>
-    <fragment android:id="@+id/homeFragment" android:name="com.arepadeobiri.fundall.HomeFragment"
+    <fragment android:id="@+id/homeFragment" android:name="com.arepadeobiri.fundall.home.HomeFragment"
               android:label="fragment_home" tools:layout="@layout/fragment_home"/>
 </navigation>
