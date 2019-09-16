@@ -15,14 +15,25 @@
                   android:text="@string/cancel"
                   android:id="@+id/cancelTextView"
                   android:textColor="@android:color/black"
-                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintTop_toTopOf="@id/welcomeBackTextView"
+                  app:layout_constraintBottom_toBottomOf="@id/welcomeBackTextView"
                   app:layout_constraintStart_toStartOf="parent"
                   android:paddingStart="8dp"
                   android:paddingEnd="8dp"/>
 
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:id="@+id/welcomeBackTextView"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:visibility="invisible"
+                  android:textAppearance="?android:attr/textAppearanceLarge"
+                  android:text="@string/welcome_back"/>
+
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  app:layout_constraintTop_toTopOf="parent"
+                  app:layout_constraintTop_toTopOf="@id/welcomeBackTextView"
+                  app:layout_constraintBottom_toBottomOf="@id/welcomeBackTextView"
                   app:layout_constraintEnd_toEndOf="parent"
                   android:paddingStart="8dp"
                   android:paddingEnd="8dp"

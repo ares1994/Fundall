@@ -1,16 +1,15 @@
 package com.arepadeobiri.fundall.Login
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.arepadeobiri.fundall.daggerUtil.AppComponent
-import com.arepadeobiri.fundall.database.UserDao
 import com.arepadeobiri.fundall.network.Fundall
 import com.arepadeobiri.fundall.network.loginDataModels.Error
-import com.arepadeobiri.fundall.network.loginDataModels.LoginResponse
 import com.arepadeobiri.fundall.network.loginDataModels.Success
-import com.arepadeobiri.fundall.network.loginDataModels.User
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
@@ -28,7 +27,10 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
     val loginFailed: LiveData<Error> get() = _loginFailed
 
     @Inject
-    lateinit var database: UserDao
+    lateinit var pref: SharedPreferences
+
+    @Inject
+    lateinit var picasso : Picasso
 
     @Inject
     lateinit var fundallIO: Fundall
@@ -38,8 +40,6 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
         appComponent.inject(this)
     }
 
-    val currentUser = database.getAll()
-
 
     fun loginUser(email: String, password: String) {
         scope.launch {
@@ -47,6 +47,13 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
             try {
                 val list = fundallIO.logInAsync(email, password).await()
                 _loginSuccessful.value = list.success
+                val user = list.success!!.user
+                pref.edit().apply {
+                    putString("firstname", user!!.firstname).apply()
+                    putString("lastname", user.lastname).apply()
+                    putString("avatarUrl", user.avatar).apply()
+                    putString("email", user.email).apply()
+                }
 
 
             } catch (t: Throwable) {

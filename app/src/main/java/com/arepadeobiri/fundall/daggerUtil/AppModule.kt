@@ -1,12 +1,12 @@
 package com.arepadeobiri.fundall.daggerUtil
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
-import com.arepadeobiri.fundall.database.AppDatabase
-import com.arepadeobiri.fundall.database.UserDao
 import com.arepadeobiri.fundall.FundallApplication
 import com.arepadeobiri.fundall.network.Fundall
 import com.arepadeobiri.fundall.network.Network.fundallIO
+import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -28,9 +28,14 @@ class AppModule(private val application: FundallApplication) {
 
     @Provides
     @Singleton
-    fun getUserDatabase(): UserDao {
-        return AppDatabase.getInstance(application).userDao
+    fun getSharedPreferences(): SharedPreferences {
+        return application.getSharedPreferences("fundall", Context.MODE_PRIVATE)
     }
 
+    @Provides
+    @Singleton
+    fun getPicassoInstance(): Picasso {
+        return Picasso.get()
+    }
 
 }

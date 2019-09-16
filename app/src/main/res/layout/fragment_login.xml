@@ -126,6 +126,7 @@
                   app:layout_constraintBottom_toBottomOf="@id/newHereTextView"
                   app:layout_constraintEnd_toEndOf="@id/newHereTextView"
                   android:text="@string/create_account"
+                  android:id="@+id/createAccountTextView"
                   android:textColor="@android:color/black"
 
 

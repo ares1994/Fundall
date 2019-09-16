@@ -1,17 +1,14 @@
 package com.arepadeobiri.fundall.splash
 
-import androidx.lifecycle.MutableLiveData
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
-import com.arepadeobiri.fundall.database.User
-import com.arepadeobiri.fundall.database.UserDao
 import com.arepadeobiri.fundall.daggerUtil.AppComponent
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class SplashViewModel(appComponent: AppComponent) : ViewModel() {
 
-    @Inject
-    lateinit var database: UserDao
+    @Inject lateinit var pref : SharedPreferences
 
     private val job = Job()
 
@@ -23,7 +20,8 @@ class SplashViewModel(appComponent: AppComponent) : ViewModel() {
         appComponent.inject(this)
     }
 
-    val currentUser = database.getAll()
+
+
 
 
 

@@ -22,7 +22,7 @@ class LoginOptionFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_login_option, container, false)
 
         binding.passwordTextView.setOnClickListener {
-            this.findNavController().navigateUp()
+            this.findNavController().navigate(LoginOptionFragmentDirections.actionLoginOptionFragmentToWelcomeBackFragment(true))
         }
         return binding.root
     }

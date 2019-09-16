@@ -43,6 +43,9 @@ class LoginFragment : Fragment() {
             binding.missYouTextView.visibility = View.VISIBLE
             binding.emailTextView.visibility = View.VISIBLE
             binding.emailInputLayout.visibility = View.INVISIBLE
+            binding.missYouTextView.text = getString(R.string.we_miss_you, viewModel.pref.getString("firstname", ""))
+            binding.emailTextView.text = viewModel.pref.getString("email", "")
+            viewModel.picasso.load(viewModel.pref.getString("avatarUrl", "")).into(binding.profileImageView)
         } else {
             binding.profileImageView.visibility = View.INVISIBLE
             binding.welcomeBackTextView.visibility = View.INVISIBLE
@@ -54,10 +57,14 @@ class LoginFragment : Fragment() {
 
         binding.loginButton.setOnClickListener {
             if (args.isUserPresent) {
-                viewModel.loginUser(viewModel.currentUser.value!![0].email, binding.passwordEditText.text.toString())
+                viewModel.loginUser(viewModel.pref.getString("email", "")!!, binding.passwordEditText.text.toString())
             } else {
                 viewModel.loginUser(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
             }
+        }
+
+        binding.createAccountTextView.setOnClickListener {
+            this.findNavController().navigate(LoginFragmentDirections.actionWelcomeBackFragmentToSignUpFragment())
         }
 
         viewModel.loginSuccessful.observe(this, Observer {

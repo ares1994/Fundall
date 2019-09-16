@@ -2,6 +2,7 @@ package com.arepadeobiri.fundall.splash
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.arepadeobiri.fundall.R
-import com.arepadeobiri.fundall.database.UserDao
 import com.arepadeobiri.fundall.databinding.FragmentSplashBinding
 import com.arepadeobiri.fundall.FundallApplication
 import javax.inject.Inject
@@ -22,8 +22,7 @@ class SplashFragment : Fragment() {
 
     private lateinit var viewModel: SplashViewModel
 
-    @Inject
-    lateinit var database: UserDao
+   
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,12 +36,14 @@ class SplashFragment : Fragment() {
             SplashViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(SplashViewModel::class.java)
 
+        Log.d("Ares", viewModel.pref.getString("firstname","something")!!)
+
         binding.startText.setOnClickListener {
-            if (viewModel.currentUser.value.isNullOrEmpty()) {
-                this.findNavController().navigate(R.id.action_splashFragment_to_signUpFragment)
-                return@setOnClickListener
+            if (viewModel.pref.getString("firstname", "") == "") {
+                this.findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToSignUpFragment())
+
             } else {
-                this.findNavController()
+                this.findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToLoginOptionFragment())
             }
 
         }

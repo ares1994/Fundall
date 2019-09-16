@@ -24,5 +24,6 @@
     <string name="new_here_create_account">new here?Create Account</string>
     <string name="forgot_password">forgot password?</string>
     <string name="create_account">Create Account</string>
+    <string name="we_miss_you">We miss you, %s</string>
 
 </resources>
