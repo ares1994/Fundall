@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.core.net.toFile
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.arepadeobiri.fundall.FundallApplication
 import com.arepadeobiri.fundall.R
 import com.arepadeobiri.fundall.databinding.FragmentHomeBinding
@@ -37,13 +38,18 @@ class HomeFragment : Fragment() {
             GenericViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
 
+        viewModel.picasso.load(viewModel.pref.getString("avatarUrl", "")).placeholder(R.drawable.placeholder)
+            .into(binding.avatarImageView)
 
 
 
 
-
-        binding.cropButton.setOnClickListener {
+        binding.avatarImageView.setOnClickListener {
             CropImage.activity().start(this.activity!!.applicationContext, this)
+        }
+
+        binding.backButton.setOnClickListener{
+            this.findNavController().navigateUp()
         }
 
 

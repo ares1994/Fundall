@@ -62,4 +62,9 @@ class SignUpViewModel(appComponent: AppComponent) : ViewModel() {
         }
 
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
+    }
 }

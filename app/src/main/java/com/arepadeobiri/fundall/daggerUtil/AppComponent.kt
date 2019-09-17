@@ -2,7 +2,7 @@ package com.arepadeobiri.fundall.daggerUtil
 
 
 
-import com.arepadeobiri.fundall.Login.LoginViewModel
+import com.arepadeobiri.fundall.login.LoginViewModel
 import com.arepadeobiri.fundall.home.HomeViewModel
 import com.arepadeobiri.fundall.loginOption.LoginOptionViewModel
 import com.arepadeobiri.fundall.signUp.SignUpViewModel

@@ -1,4 +1,4 @@
-package com.arepadeobiri.fundall.Login
+package com.arepadeobiri.fundall.login
 
 
 import android.os.Bundle
@@ -48,9 +48,9 @@ class LoginFragment : Fragment() {
             binding.missYouTextView.text = getString(R.string.we_miss_you, viewModel.pref.getString("firstname", ""))
             binding.emailTextView.text = viewModel.pref.getString("email", "")
 
-            binding.profileImageView.setImageResource(R.drawable.placeholder)
+
             viewModel.profileInfo.observe(this, Observer {
-                viewModel.picasso.load(it.data!!.avatar).into(binding.profileImageView)
+                viewModel.picasso.load(it.data!!.avatar).placeholder(R.drawable.placeholder).into(binding.profileImageView)
             })
 
         } else {
@@ -83,18 +83,9 @@ class LoginFragment : Fragment() {
             Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()
         })
 
-
-
-
-
-
-
         binding.cancelTextView.setOnClickListener {
             this.findNavController().navigateUp()
         }
-
-
-
 
         return binding.root
     }

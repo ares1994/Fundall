@@ -1,4 +1,4 @@
-package com.arepadeobiri.fundall.Login
+package com.arepadeobiri.fundall.login
 
 import android.content.SharedPreferences
 import android.util.Log
@@ -81,4 +81,8 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
+    }
 }

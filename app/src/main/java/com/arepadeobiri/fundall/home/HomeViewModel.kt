@@ -82,4 +82,8 @@ class HomeViewModel(private val appComponent: AppComponent) : ViewModel() {
     }
 
 
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
+    }
 }

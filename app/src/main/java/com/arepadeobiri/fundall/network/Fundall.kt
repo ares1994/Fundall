@@ -21,11 +21,7 @@ import retrofit2.http.Multipart
 interface Fundall {
 
     @Headers(
-        "Accept: application/json",
-        "Content-Type: application/json",
-        "Authorization: Bearer 'API_TOKEN'"
-    )
-
+    "Accept: application/json")
     @FormUrlEncoded
     @POST("/api/v1/register")
     fun registerUserAsync(
@@ -35,6 +31,7 @@ interface Fundall {
         @Field("password") password: String,
         @Field("password_confirmation") passwordConfirmation: String
     ): Deferred<Response>
+
 
 
     @FormUrlEncoded
@@ -52,6 +49,7 @@ interface Fundall {
         @Part avatar: MultipartBody.Part?
 //        @Part("avatar") photo: RequestBody
     ): Deferred<AvatarResponse>
+
 
 
     @GET("/api/v1/base/profile")

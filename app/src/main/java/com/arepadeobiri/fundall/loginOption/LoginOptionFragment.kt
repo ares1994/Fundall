@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.arepadeobiri.fundall.FundallApplication
 import com.arepadeobiri.fundall.GenericViewModelFactory
-import com.arepadeobiri.fundall.Login.LoginFragmentDirections
 import com.arepadeobiri.fundall.R
 import com.arepadeobiri.fundall.databinding.FragmentLoginOptionBinding
 

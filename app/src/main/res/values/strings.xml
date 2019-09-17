@@ -26,7 +26,7 @@
     <string name="create_account">Create Account</string>
     <string name="we_miss_you">We miss you, %s</string>
 
-    <string name="lifestyle">%s lifestyle</string>
+    <string name="lifestyle">%s\'s lifestyle</string>
     <string name="switch_account">Switch Account</string>
     <string name="not_switch_account">Not %s? Switch Account</string>
 

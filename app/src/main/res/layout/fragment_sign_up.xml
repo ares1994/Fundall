@@ -11,7 +11,7 @@
             tools:context=".signUp.SignUpFragment">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:textSize="12sp"
+                  android:textSize="@dimen/small_font_size"
                   android:text="@string/cancel"
                   android:id="@+id/cancelTextView"
                   android:textColor="@android:color/black"
@@ -39,7 +39,7 @@
                   android:paddingEnd="8dp"
                   android:text="@string/benefits"
                   android:textColor="@android:color/black"
-                  android:textSize="12sp"/>
+                  android:textSize="@dimen/small_font_size"/>
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   tools:text="Let's get Started"
@@ -56,7 +56,7 @@
                   app:layout_constraintStart_toStartOf="parent"
                   android:layout_marginTop="8dp"
                   android:text="@string/your_first_step_towards_a_better_financial_lifestyle_starts_here"
-                  android:textSize="12sp"
+                  android:textSize="@dimen/small_font_size"
                   android:id="@+id/freedomTextView"
                   android:textColor="@color/colorAccent"
                   tools:text="Your first step towards a better financial lifestyle starts here"/>
@@ -75,7 +75,7 @@
                                                                      android:layout_height="wrap_content"
                                                                      android:hint="@string/first_name"
                                                                      android:inputType="text"
-                                                                     android:textSize="12sp"
+                                                                     android:textSize="@dimen/small_font_size"
                                                                      android:id="@+id/firstNameEditText"
                                                                      android:backgroundTint="@color/editsColor"
                                                                      android:drawableStart="@drawable/ic_person_grey_24dp"/>
@@ -97,7 +97,7 @@
                                                                      android:layout_height="wrap_content"
                                                                      android:hint="@string/last_name"
                                                                      android:inputType="text"
-                                                                     android:textSize="12sp"
+                                                                     android:textSize="@dimen/small_font_size"
                                                                      android:id="@+id/lastNameEditText"
                                                                      android:backgroundTint="@color/editsColor"
                                                                      android:drawableStart="@drawable/ic_person_grey_24dp"/>
@@ -116,7 +116,7 @@
             <com.google.android.material.textfield.TextInputEditText android:layout_width="match_parent"
                                                                      android:layout_height="wrap_content"
                                                                      android:backgroundTint="@color/editsColor"
-                                                                     android:textSize="12sp"
+                                                                     android:textSize="@dimen/small_font_size"
                                                                      android:inputType="textEmailAddress"
                                                                      android:id="@+id/emailEditText"
                                                                      android:hint="@string/email_address"
@@ -133,7 +133,7 @@
         >
             <com.google.android.material.textfield.TextInputEditText android:layout_width="match_parent"
                                                                      android:layout_height="wrap_content"
-                                                                     android:textSize="12sp"
+                                                                     android:textSize="@dimen/small_font_size"
                                                                      android:id="@+id/phoneEditText"
                                                                      android:inputType="phone"
                                                                      android:backgroundTint="@color/editsColor"
@@ -158,9 +158,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/small_font_size"
                     android:id="@+id/passwordEditText"
                     style="@style/fieldTheme"
+                    android:imeOptions="actionDone"
                     android:hint="@string/password"
                     android:backgroundTint="@color/editsColor"
                     android:drawableStart="@drawable/ic_lock_grey_24dp"
@@ -172,7 +173,7 @@
                   app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
                   android:layout_marginTop="16dp"
                   android:id="@+id/gotInviteTextView"
-                  android:textSize="12sp"
+                  android:textSize="@dimen/small_font_size"
                   android:text="@string/got_invite_code"
                   android:textColor="@color/editsColor"
         />

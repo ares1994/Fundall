@@ -2,7 +2,7 @@ package com.arepadeobiri.fundall
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.arepadeobiri.fundall.Login.LoginViewModel
+import com.arepadeobiri.fundall.login.LoginViewModel
 import com.arepadeobiri.fundall.daggerUtil.AppComponent
 import com.arepadeobiri.fundall.home.HomeViewModel
 import com.arepadeobiri.fundall.loginOption.LoginOptionViewModel
