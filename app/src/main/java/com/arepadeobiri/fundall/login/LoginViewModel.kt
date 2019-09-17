@@ -9,6 +9,11 @@ import com.arepadeobiri.fundall.daggerUtil.AppComponent
 import com.arepadeobiri.fundall.network.Fundall
 import com.arepadeobiri.fundall.network.loginDataModels.Error
 import com.arepadeobiri.fundall.network.loginDataModels.Success
+import com.arepadeobiri.fundall.util.FundallUtils.Companion.AVATAR
+import com.arepadeobiri.fundall.util.FundallUtils.Companion.EMAIL
+import com.arepadeobiri.fundall.util.FundallUtils.Companion.FIRST_NAME
+import com.arepadeobiri.fundall.util.FundallUtils.Companion.LAST_NAME
+import com.arepadeobiri.fundall.util.FundallUtils.Companion.TOKEN
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -48,20 +53,26 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
         scope.launch {
 
             try {
-                val list = fundallIO.logInAsync(email, password).await()
-                _loginSuccessful.value = list.success
-                val user = list.success!!.user
-                pref.edit().apply {
-                    putString("firstname", user!!.firstname).apply()
-                    putString("lastname", user.lastname).apply()
-                    putString("avatarUrl", user.avatar).apply()
-                    putString("email", user.email).apply()
-                    putString("token", "Bearer "+ user.accessToken).apply()
+                val response = fundallIO.logInAsync(email, password).await()
+
+                if (response.success != null){
+                    _loginSuccessful.value = response.success
+                    val user = response.success.user
+                    pref.edit().apply {
+                        putString(FIRST_NAME, user!!.firstname).apply()
+                        putString(LAST_NAME, user.lastname).apply()
+                        putString(AVATAR, user.avatar).apply()
+                        putString(EMAIL, user.email).apply()
+                        putString(TOKEN, "Bearer "+ user.accessToken).apply()
+                    }
+                }
+                else{
+                    _loginFailed.value = response.error
                 }
 
 
+
             } catch (t: Throwable) {
-                _loginFailed.value = Error(t.message, "Please check your email and password")
                 Log.d("LoginViewModel", "${t.message}")
 
 

@@ -1,6 +1,7 @@
 package com.arepadeobiri.fundall.login
 
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.arepadeobiri.fundall.FundallApplication
 import com.arepadeobiri.fundall.R
 import com.arepadeobiri.fundall.databinding.FragmentLoginBinding
 import com.arepadeobiri.fundall.GenericViewModelFactory
+import com.arepadeobiri.fundall.util.FundallUtils.Companion.EMAIL
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -38,6 +40,14 @@ class LoginFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginViewModel::class.java)
 
+        val progressDialog = ProgressDialog(this.context)
+        progressDialog.apply {
+            setMessage("Signing In...")
+            setCancelable(false)
+            setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        }
+
+
         if (args!!.isUserPresent) {
             viewModel.retrieveProfile()
             binding.profileImageView.visibility = View.VISIBLE
@@ -46,11 +56,13 @@ class LoginFragment : Fragment() {
             binding.emailTextView.visibility = View.VISIBLE
             binding.emailInputLayout.visibility = View.INVISIBLE
             binding.missYouTextView.text = getString(R.string.we_miss_you, viewModel.pref.getString("firstname", ""))
-            binding.emailTextView.text = viewModel.pref.getString("email", "")
+            binding.emailTextView.text = viewModel.pref.getString(EMAIL, "")
 
 
             viewModel.profileInfo.observe(this, Observer {
-                viewModel.picasso.load(it.data!!.avatar).placeholder(R.drawable.placeholder).into(binding.profileImageView)
+                viewModel.picasso.load(it.data!!.avatar).placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
+                    .into(binding.profileImageView)
             })
 
         } else {
@@ -64,10 +76,11 @@ class LoginFragment : Fragment() {
 
         binding.loginButton.setOnClickListener {
             if (args.isUserPresent) {
-                viewModel.loginUser(viewModel.pref.getString("email", "")!!, binding.passwordEditText.text.toString())
+                viewModel.loginUser(viewModel.pref.getString(EMAIL, "")!!, binding.passwordEditText.text.toString())
             } else {
                 viewModel.loginUser(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
             }
+            progressDialog.show()
         }
 
         binding.createAccountTextView.setOnClickListener {
@@ -75,11 +88,13 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.loginSuccessful.observe(this, Observer {
+            progressDialog.dismiss()
             Snackbar.make(binding.root, "Login Successful", Snackbar.LENGTH_LONG).show()
             this.findNavController().navigate(LoginFragmentDirections.actionWelcomeBackFragmentToHomeFragment())
         })
 
         viewModel.loginFailed.observe(this, Observer {
+            progressDialog.dismiss()
             Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()
         })
 

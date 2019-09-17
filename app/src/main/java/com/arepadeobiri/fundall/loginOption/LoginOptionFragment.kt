@@ -13,6 +13,7 @@ import com.arepadeobiri.fundall.FundallApplication
 import com.arepadeobiri.fundall.GenericViewModelFactory
 import com.arepadeobiri.fundall.R
 import com.arepadeobiri.fundall.databinding.FragmentLoginOptionBinding
+import com.arepadeobiri.fundall.util.FundallUtils.Companion.FIRST_NAME
 
 
 class LoginOptionFragment : Fragment() {
@@ -31,9 +32,9 @@ class LoginOptionFragment : Fragment() {
             GenericViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(LoginOptionViewModel::class.java)
 
-        binding.lifestyleTextView.text = getString(R.string.lifestyle, viewModel.pref.getString("firstname", ""))
+        binding.lifestyleTextView.text = getString(R.string.lifestyle, viewModel.pref.getString(FIRST_NAME, ""))
         binding.switchAccountTextView.text =
-            getString(R.string.not_switch_account, viewModel.pref.getString("firstname", ""))
+            getString(R.string.not_switch_account, viewModel.pref.getString(FIRST_NAME, ""))
         binding.switchAccountTextViewButton.setOnClickListener {
             this.findNavController()
                 .navigate(LoginOptionFragmentDirections.actionLoginOptionFragmentToWelcomeBackFragment(false))

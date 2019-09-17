@@ -1,6 +1,7 @@
 package com.arepadeobiri.fundall.daggerUtil
 
 import android.content.SharedPreferences
+import com.arepadeobiri.fundall.util.FundallUtils.Companion.TOKEN
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -12,7 +13,7 @@ class AuthenticationInterceptor(
             chain.proceed(chain
                     .request()
                     .newBuilder()
-                .addHeader(HEADER_AUTHORIZATION, user.getString("token","") ?: "")
+                .addHeader(HEADER_AUTHORIZATION, user.getString(TOKEN,"") ?: "")
                     .build())
 
     companion object {

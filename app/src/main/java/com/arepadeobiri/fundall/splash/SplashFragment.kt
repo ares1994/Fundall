@@ -14,6 +14,7 @@ import com.arepadeobiri.fundall.R
 import com.arepadeobiri.fundall.databinding.FragmentSplashBinding
 import com.arepadeobiri.fundall.FundallApplication
 import com.arepadeobiri.fundall.GenericViewModelFactory
+import com.arepadeobiri.fundall.util.FundallUtils.Companion.FIRST_NAME
 
 
 class SplashFragment : Fragment() {
@@ -36,10 +37,9 @@ class SplashFragment : Fragment() {
             GenericViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(SplashViewModel::class.java)
 
-        Log.d("Ares", viewModel.pref.getString("firstname","something")!!)
 
         binding.startText.setOnClickListener {
-            if (viewModel.pref.getString("firstname", "") == "") {
+            if (viewModel.pref.getString(FIRST_NAME, "") == "") {
                 this.findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToSignUpFragment())
 
             } else {

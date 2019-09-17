@@ -3,10 +3,15 @@ package com.arepadeobiri.fundall.home
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.content.edit
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.arepadeobiri.fundall.daggerUtil.AppComponent
 import com.arepadeobiri.fundall.network.Fundall
 import com.arepadeobiri.fundall.network.UploadImage
+import com.arepadeobiri.fundall.network.avatarDataModels.Error
+
+import com.arepadeobiri.fundall.network.avatarDataModels.Success
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -37,6 +42,12 @@ class HomeViewModel(private val appComponent: AppComponent) : ViewModel() {
 
     private val scope = CoroutineScope(Dispatchers.Main + job)
 
+    private val _avatarUploadSuccessful = MutableLiveData<Success>()
+    val avatarUploadSuccessful: LiveData<Success> get() = _avatarUploadSuccessful
+
+    private val _avatarUploadFailed = MutableLiveData<Error>()
+    val avatarUploadFailed: LiveData<Error> get() = _avatarUploadFailed
+
     init {
         appComponent.inject(this)
     }
@@ -52,9 +63,11 @@ class HomeViewModel(private val appComponent: AppComponent) : ViewModel() {
                     getFilePart(image.file)
                 ).await()
                 if (response.success != null) {
-                    Log.d("Ares", "${response.success.message}")
+                    _avatarUploadSuccessful.value = response.success
 
                 } else {
+                    _avatarUploadFailed.value = response.error
+
                 }
 
             } catch (t: Throwable) {
