@@ -31,6 +31,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var imageUri: Uri
     private lateinit var viewModel: HomeViewModel
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +45,14 @@ class HomeFragment : Fragment() {
         val viewModelFactory =
             GenericViewModelFactory(((this.activity!!.application) as FundallApplication).getAppComponent())
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
+
+
+        progressDialog = ProgressDialog(this.context,R.style.avatarDialogTheme)
+        progressDialog.apply {
+            setCancelable(false)
+
+
+        }
 
         viewModel.picasso.load(viewModel.pref.getString(AVATAR, "")).placeholder(R.drawable.placeholder)
             .error(R.drawable.placeholder)
@@ -62,13 +71,21 @@ class HomeFragment : Fragment() {
 
 
         viewModel.avatarUploadSuccessful.observe(this, Observer {
+            viewModel.showProgressBar(false)
             Snackbar.make(binding.root, "Avatar uploaded successfully", Snackbar.LENGTH_LONG).show()
             binding.avatarImageView.setImageURI(imageUri)
 
         })
 
         viewModel.avatarUploadFailed.observe(this, Observer {
+            viewModel.showProgressBar(false)
+            progressDialog.dismiss()
             Snackbar.make(binding.root, "Avatar upload failed", Snackbar.LENGTH_LONG).show()
+        })
+
+
+        viewModel.progressBarShow.observe(this, Observer {
+            if (it) progressDialog.show() else progressDialog.dismiss()
         })
 
 
@@ -79,7 +96,10 @@ class HomeFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+
+
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+
 
             val result = CropImage.getActivityResult(data)
 
@@ -91,6 +111,7 @@ class HomeFragment : Fragment() {
 
 
             } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+
                 Toast.makeText(this.context, "Error is : ${result.error}", Toast.LENGTH_LONG).show()
             }
         }

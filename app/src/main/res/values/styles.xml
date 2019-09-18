@@ -24,5 +24,11 @@
 
     </style>
 
+    <style name="avatarDialogTheme" parent="android:Theme.Material.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+    </style>
+
 
 </resources>

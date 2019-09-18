@@ -48,6 +48,12 @@ class HomeViewModel(private val appComponent: AppComponent) : ViewModel() {
     private val _avatarUploadFailed = MutableLiveData<Error>()
     val avatarUploadFailed: LiveData<Error> get() = _avatarUploadFailed
 
+    private val _progressBarShow = MutableLiveData<Boolean>()
+    val progressBarShow: LiveData<Boolean> get() = _progressBarShow
+
+
+
+
     init {
         appComponent.inject(this)
     }
@@ -55,7 +61,7 @@ class HomeViewModel(private val appComponent: AppComponent) : ViewModel() {
 
     fun uploadAvatar(image: UploadImage) {
         scope.launch {
-
+        _progressBarShow.value = true
 
             try {
                 val response = fundallIO.uploadAvatarAsync(
@@ -92,6 +98,11 @@ class HomeViewModel(private val appComponent: AppComponent) : ViewModel() {
 
     companion object {
         private const val MEDIA_TYPE = "image/*"
+    }
+
+
+    fun showProgressBar(value: Boolean){
+        _progressBarShow.value = value
     }
 
 
