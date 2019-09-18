@@ -23,6 +23,13 @@ class SignUpViewModel(appComponent: AppComponent) : ViewModel() {
     private val _registerMessage = MutableLiveData<Info>()
     val registerMessage: LiveData<Info> get() = _registerMessage
 
+    private val _buttonVisible = MutableLiveData<Boolean>()
+    val buttonVisible: LiveData<Boolean> get() = _buttonVisible
+
+
+
+
+
 
     @Inject
     lateinit var fundallIO: Fundall
@@ -30,6 +37,7 @@ class SignUpViewModel(appComponent: AppComponent) : ViewModel() {
 
     init {
         appComponent.inject(this)
+        _buttonVisible.value = false
     }
 
 
@@ -42,26 +50,32 @@ class SignUpViewModel(appComponent: AppComponent) : ViewModel() {
     ) {
         scope.launch {
             try {
-                val list = fundallIO.registerUserAsync(
+                val response = fundallIO.registerUserAsync(
                     firstName,
                     lastName,
                     email,
                     password,
                     passwordConfirmation
                 ).await()
-                if (list.success != null) {
-                    _registerMessage.value = list.success
+                if (response.success != null) {
+                    _registerMessage.value = response.success
                 } else {
-                    _registerMessage.value = list.error
+                    _registerMessage.value = response.error
                 }
 
             } catch (t: Throwable) {
                 Log.d("SignUpViewModel", "${t.message}")
-                _registerMessage.value = Info("Registration unsuccessful, please try again", null)
+                _registerMessage.value = Info("Registration unsuccessful, please try again")
             }
         }
 
     }
+
+    fun isButtonVisible(value: Boolean){
+        _buttonVisible.value = value
+    }
+
+
 
     override fun onCleared() {
         super.onCleared()

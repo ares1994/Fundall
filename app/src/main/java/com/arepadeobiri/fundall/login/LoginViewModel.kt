@@ -34,11 +34,15 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
     private val _profileInfo = MutableLiveData<com.arepadeobiri.fundall.network.profileDataModels.Success>()
     val profileInfo: LiveData<com.arepadeobiri.fundall.network.profileDataModels.Success> get() = _profileInfo
 
+
+    private val _buttonVisible = MutableLiveData<Boolean>()
+    val buttonVisible: LiveData<Boolean> get() = _buttonVisible
+
     @Inject
     lateinit var pref: SharedPreferences
 
     @Inject
-    lateinit var picasso : Picasso
+    lateinit var picasso: Picasso
 
     @Inject
     lateinit var fundallIO: Fundall
@@ -46,6 +50,7 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
 
     init {
         appComponent.inject(this)
+        _buttonVisible.value = false
     }
 
 
@@ -55,7 +60,7 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
             try {
                 val response = fundallIO.logInAsync(email, password).await()
 
-                if (response.success != null){
+                if (response.success != null) {
                     _loginSuccessful.value = response.success
                     val user = response.success.user
                     pref.edit().apply {
@@ -63,17 +68,16 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
                         putString(LAST_NAME, user.lastname).apply()
                         putString(AVATAR, user.avatar).apply()
                         putString(EMAIL, user.email).apply()
-                        putString(TOKEN, "Bearer "+ user.accessToken).apply()
+                        putString(TOKEN, "Bearer " + user.accessToken).apply()
                     }
-                }
-                else{
+                } else {
                     _loginFailed.value = response.error
                 }
 
 
-
             } catch (t: Throwable) {
                 Log.d("LoginViewModel", "${t.message}")
+                _loginFailed.value = Error(null,"Login failed")
 
 
             }
@@ -82,14 +86,18 @@ class LoginViewModel(appComponent: AppComponent) : ViewModel() {
 
     }
 
-    fun retrieveProfile(){
+    fun retrieveProfile() {
         scope.launch {
             val response = fundallIO.retrieveProfileAsync().await()
-            if (response.success!= null){
-             _profileInfo.value = response.success
+            if (response.success != null) {
+                _profileInfo.value = response.success
             }
 
         }
+    }
+
+    fun isButtonVisible(value: Boolean) {
+        _buttonVisible.value = value
     }
 
     override fun onCleared() {

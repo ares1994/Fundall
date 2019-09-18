@@ -3,6 +3,8 @@ package com.arepadeobiri.fundall.login
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,15 +21,16 @@ import com.arepadeobiri.fundall.util.FundallUtils.Companion.EMAIL
 import com.google.android.material.snackbar.Snackbar
 
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), TextWatcher {
 
+    private lateinit var args: LoginFragmentArgs
     private lateinit var binding: FragmentLoginBinding
     private lateinit var viewModel: LoginViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val args = arguments?.let { LoginFragmentArgs.fromBundle(it) }
+        args = LoginFragmentArgs.fromBundle(arguments!!)
 
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(
@@ -42,13 +45,13 @@ class LoginFragment : Fragment() {
 
         val progressDialog = ProgressDialog(this.context)
         progressDialog.apply {
-            setMessage("Signing In...")
+            setMessage("Logging In...")
             setCancelable(false)
             setProgressStyle(ProgressDialog.STYLE_SPINNER)
         }
 
 
-        if (args!!.isUserPresent) {
+        if (args.isUserPresent) {
             viewModel.retrieveProfile()
             binding.profileImageView.visibility = View.VISIBLE
             binding.welcomeBackTextView.visibility = View.VISIBLE
@@ -71,7 +74,29 @@ class LoginFragment : Fragment() {
             binding.emailTextView.visibility = View.INVISIBLE
             binding.missYouTextView.visibility = View.INVISIBLE
             binding.emailInputLayout.visibility = View.VISIBLE
+            binding.emailEditText.addTextChangedListener(this)
         }
+
+
+
+        viewModel.loginSuccessful.observe(this, Observer {
+            progressDialog.dismiss()
+            Snackbar.make(binding.root, "Login Successful", Snackbar.LENGTH_LONG).show()
+            this.findNavController().navigate(LoginFragmentDirections.actionWelcomeBackFragmentToHomeFragment())
+        })
+
+        viewModel.loginFailed.observe(this, Observer {
+            progressDialog.dismiss()
+            Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()
+        })
+
+        viewModel.buttonVisible.observe(this, Observer {
+            binding.loginButton.isEnabled = it
+        })
+
+
+
+        binding.passwordEditText.addTextChangedListener(this)
 
 
         binding.loginButton.setOnClickListener {
@@ -87,22 +112,36 @@ class LoginFragment : Fragment() {
             this.findNavController().navigate(LoginFragmentDirections.actionWelcomeBackFragmentToSignUpFragment())
         }
 
-        viewModel.loginSuccessful.observe(this, Observer {
-            progressDialog.dismiss()
-            Snackbar.make(binding.root, "Login Successful", Snackbar.LENGTH_LONG).show()
-            this.findNavController().navigate(LoginFragmentDirections.actionWelcomeBackFragmentToHomeFragment())
-        })
-
-        viewModel.loginFailed.observe(this, Observer {
-            progressDialog.dismiss()
-            Snackbar.make(binding.root, "${it.message}", Snackbar.LENGTH_LONG).show()
-        })
-
         binding.cancelTextView.setOnClickListener {
             this.findNavController().navigateUp()
         }
 
         return binding.root
+    }
+
+
+    override fun afterTextChanged(p0: Editable?) {
+        if (args.isUserPresent) {
+            when {
+                binding.passwordEditText.text.toString().isEmpty() -> viewModel.isButtonVisible(false)
+                else -> viewModel.isButtonVisible(true)
+            }
+        } else {
+            when {
+                binding.emailEditText.text.toString().isEmpty() -> viewModel.isButtonVisible(false)
+                binding.passwordEditText.text.toString().isEmpty() -> viewModel.isButtonVisible(false)
+                else -> viewModel.isButtonVisible(true)
+            }
+
+        }
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
     }
 
 
