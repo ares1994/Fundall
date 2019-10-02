@@ -26,7 +26,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import javax.inject.Inject
 
-class HomeViewModel(private val appComponent: AppComponent) : ViewModel() {
+class HomeViewModel(appComponent: AppComponent) : ViewModel() {
 
 
     @Inject

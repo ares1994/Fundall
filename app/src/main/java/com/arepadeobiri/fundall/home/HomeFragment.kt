@@ -16,6 +16,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.arepadeobiri.CardsRecyclerAdapter
 import com.arepadeobiri.fundall.FundallApplication
 import com.arepadeobiri.fundall.R
 import com.arepadeobiri.fundall.databinding.FragmentHomeBinding
@@ -40,6 +43,9 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
+
+        val categories =
+            listOf("Fundall lifestyle card", "Fundall rave card", "Fundall lifestyle card", "Fundall lifestyle card")
 
 
         val viewModelFactory =
@@ -89,6 +95,14 @@ class HomeFragment : Fragment() {
         })
 
 
+        binding.cardsRecyclerView.apply {
+            layoutManager = LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+            adapter = CardsRecyclerAdapter(categories)
+        }
+
+        binding.pageIndicator.attachTo(binding.cardsRecyclerView)
+
+
         return binding.root
     }
 
@@ -115,6 +129,10 @@ class HomeFragment : Fragment() {
                 Toast.makeText(this.context, "Error is : ${result.error}", Toast.LENGTH_LONG).show()
             }
         }
+
+
+
+
 
 
     }

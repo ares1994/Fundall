@@ -29,6 +29,16 @@
     <string name="lifestyle">%s\'s lifestyle</string>
     <string name="switch_account">Switch Account</string>
     <string name="not_switch_account">Not %s? Switch Account</string>
+    <string name="fundall_e_wallet">FundAll e-Wallet</string>
+    <string name="account_id"><b>Account ID:</b> 901672789, Providus</string>
+    <string name="total_balance">Total Balance</string>
+    <string name="_12_346">₦12,346.37</string>
+    <string name="income">Income</string>
+    <string name="spent">Spent</string>
+    <string name="request_for_new_lifestyle_card">Request for new Lifestyle Card</string>
+    <string name="add_other_cards">Add other cards</string>
+    <string name="manage_card_settings">Manage Card Settings</string>
+    <string name="cards">Cards</string>
 
 
 </resources>

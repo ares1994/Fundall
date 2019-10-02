@@ -1,37 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
     </data>
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/ic_home_background"
             tools:context=".home.HomeFragment">
 
-        <com.mikhaellopez.circularimageview.CircularImageView android:layout_width="50dp"
-                                                              android:layout_height="50dp"
-                                                              android:id="@+id/avatarImageView"
-                                                              android:layout_margin="16dp"
-                                                              app:layout_constraintTop_toTopOf="parent"
-                                                              app:layout_constraintEnd_toEndOf="parent"
-                                                             />
-        
-        <ImageView android:layout_width="26dp" android:layout_height="20dp"
-        app:layout_constraintTop_toTopOf="@id/avatarImageView"
-        app:layout_constraintBottom_toBottomOf="@id/avatarImageView"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/ic_back"
-                   android:id="@+id/backButton"
-        android:layout_margin="16dp"/>
+        <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/avatarImageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="26dp"
+                android:layout_height="20dp"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="@id/avatarImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/avatarImageView" />
+
+        <TextView
+                android:id="@+id/homeLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fundall_e_wallet"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/avatarImageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/avatarImageView" />
+
+
+        <androidx.core.widget.NestedScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/avatarImageView">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/accountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@string/account_id"
+                        android:textColor="@android:color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                        android:id="@+id/balanceTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/total_balance"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@android:color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/accountTextView" />
+
+                <TextView
+                        android:id="@+id/totalBalanceTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/_12_346"
+                        android:textColor="@android:color/white"
+                        android:textSize="36sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/balanceTextView" />
+
+                <TextView
+                        android:id="@+id/incomeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="32dp"
+                        android:text="@string/income"
+                        android:textColor="@android:color/white"
+                        app:layout_constraintEnd_toStartOf="@+id/SpentTextView"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/totalBalanceTextView" />
+
+                <TextView
+                        android:id="@+id/SpentTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="48dp"
+                        android:text="@string/spent"
+                        android:textColor="@android:color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@id/incomeTextView"
+                        app:layout_constraintTop_toBottomOf="@id/totalBalanceTextView" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_12_346"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/incomeTextView"
+                        app:layout_constraintTop_toBottomOf="@id/incomeTextView" />
+
+
+                <TextView
+                        android:id="@+id/spentValueTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_12_346"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/SpentTextView"
+                        app:layout_constraintTop_toBottomOf="@id/SpentTextView" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/first_layout_background"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/spentValueTextView">
+
+
+                    <TextView
+                            android:id="@+id/requestLifestyleCardTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="32dp"
+                            android:drawableStart="@drawable/ic_request_lifestyle_card"
+                            android:drawablePadding="8dp"
+                            android:text="@string/request_for_new_lifestyle_card"
+                            android:textColor="@android:color/white"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                            android:id="@+id/addOtherCardsTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:drawableStart="@drawable/ic_add_other_cards"
+                            android:drawablePadding="8dp"
+                            android:text="@string/add_other_cards"
+                            android:textColor="@android:color/white"
+                            app:layout_constraintStart_toStartOf="@id/requestLifestyleCardTextView"
+                            app:layout_constraintTop_toBottomOf="@id/requestLifestyleCardTextView" />
+
+                    <TextView
+                            android:id="@+id/manageCardSettingsTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:drawableStart="@drawable/ic_manage_card_settings"
+                            android:drawablePadding="8dp"
+                            android:text="@string/manage_card_settings"
+                            android:textColor="@android:color/white"
+                            app:layout_constraintStart_toStartOf="@id/requestLifestyleCardTextView"
+                            app:layout_constraintTop_toBottomOf="@id/addOtherCardsTextView" />
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="32dp"
+                            android:background="@drawable/second_layout_background"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/manageCardSettingsTextView">
+
+                        <TextView
+                                android:id="@+id/cardsTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="32dp"
+                                android:layout_marginEnd="32dp"
+                                android:text="@string/cards"
+                                android:textAppearance="?android:textAppearanceLarge"
+                                android:textColor="@android:color/black"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/pageIndicator"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <com.chahinem.pageindicator.PageIndicator
+                                android:id="@+id/pageIndicator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="32dp"
+                                app:layout_constraintBottom_toBottomOf="@id/cardsTextView"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/cardsTextView"
+                                app:layout_constraintTop_toTopOf="@id/cardsTextView"
+                                app:piSelectedColor="@color/firstBackgroundColor" />
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/cardsRecyclerView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/cardsTextView" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+
 
         <!--<Button android:layout_width="wrap_content" android:layout_height="wrap_content"-->
-                <!--android:text="Crop"-->
-                <!--app:layout_constraintTop_toBottomOf="@id/avatarImageView"-->
-                <!--app:layout_constraintStart_toStartOf="@id/avatarImageView"-->
-                <!--android:layout_marginTop="16dp"-->
-                <!--android:id="@+id/cropButton"-->
-                <!--app:layout_constraintEnd_toEndOf="@id/avatarImageView"/>-->
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+        <!--android:text="Crop"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/avatarImageView"-->
+        <!--app:layout_constraintStart_toStartOf="@id/avatarImageView"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:id="@+id/cropButton"-->
+        <!--app:layout_constraintEnd_toEndOf="@id/avatarImageView"/>-->

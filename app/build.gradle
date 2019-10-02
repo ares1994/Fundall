@@ -86,4 +86,7 @@ dependencies {
     //Safeargs
     apply plugin: 'androidx.navigation.safeargs'
 
+    //pageIndicator
+    implementation 'com.github.chahine:pageindicator:0.2.8'
+
 }

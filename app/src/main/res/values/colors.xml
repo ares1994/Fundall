@@ -8,4 +8,6 @@
     <color name="primaryTextColor">#000000</color>
 
     <color name="editsColor">#00e676</color>
+
+    <color name="firstBackgroundColor">#0E1015</color>
 </resources>
